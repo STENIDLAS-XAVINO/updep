@@ -1,6 +1,7 @@
 package main
 
 import (
+	"npmupdate/pkg/components/row"
 	"npmupdate/pkg/entities"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -8,12 +9,28 @@ import (
 
 type AppModel struct {
 	packages []entities.Package
+	rows     []row.Row
 }
 
 func NewAppModel() AppModel {
 	packages := entities.ParseJSON()
+
+	columnWidth := []int{0, 0, 0, 0}
+	for _, p := range packages {
+		columnWidth[0] = max(columnWidth[0], lipgloss.Width(p.Name))
+		columnWidth[1] = max(columnWidth[1], lipgloss.Width(p.Wanted))
+		columnWidth[2] = max(columnWidth[2], lipgloss.Width(p.Latest))
+		columnWidth[3] = max(columnWidth[3], lipgloss.Width(p.Current))
+	}
+
+	rows := []row.Row{}
+	for _, p := range packages {
+		rows = append(rows, row.New(p, columnWidth))
+	}
+
 	return AppModel{
 		packages: packages,
+		rows:     rows,
 	}
 }
 
@@ -33,7 +50,15 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m AppModel) View() string {
-	return ""
+	renderRows := []string{}
+	for i, p := range m.rows {
+		renderRows = append(
+			renderRows,
+			selectedStyle.Render(p.View()),
+		)
+	}
+
+	return lipgloss.JoinVertical(lipgloss.Left, renderRows...)
 }
 
 func main() {
