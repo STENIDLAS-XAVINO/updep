@@ -5,11 +5,13 @@ import (
 	"npmupdate/pkg/entities"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
 type AppModel struct {
 	packages []entities.Package
 	rows     []row.Row
+	cursor   int
 }
 
 func NewAppModel() AppModel {
@@ -31,6 +33,7 @@ func NewAppModel() AppModel {
 	return AppModel{
 		packages: packages,
 		rows:     rows,
+		cursor:   0,
 	}
 }
 
@@ -52,9 +55,14 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m AppModel) View() string {
 	renderRows := []string{}
 	for i, p := range m.rows {
+		if i != m.cursor {
+			renderRows = append(renderRows, p.View())
+			continue
+		}
+
 		renderRows = append(
 			renderRows,
-			selectedStyle.Render(p.View()),
+			row.ActiveRowStyle.Render(p.View()),
 		)
 	}
 

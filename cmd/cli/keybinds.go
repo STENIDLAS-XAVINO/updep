@@ -6,10 +6,18 @@ import (
 )
 
 type KeyMap struct {
-	Quit key.Binding
+	Up, Down, Quit key.Binding
 }
 
 var DefaultKeyMap = KeyMap{
+	Up: key.NewBinding(
+		key.WithKeys("k", "up"),
+		key.WithHelp("↑/k", "move up"),
+	),
+	Down: key.NewBinding(
+		key.WithKeys("j", "down"),
+		key.WithHelp("↓/j", "move down"),
+	),
 	Quit: key.NewBinding(
 		key.WithKeys("q", "ctrl+c", "esc"),
 		key.WithHelp("↓/j", "move down"),
@@ -18,6 +26,14 @@ var DefaultKeyMap = KeyMap{
 
 func (m *AppModel) handleKeyPress(msg tea.KeyMsg) tea.Cmd {
 	switch {
+	case key.Matches(msg, DefaultKeyMap.Up):
+		if m.selected > 0 {
+			m.selected -= 1
+		}
+	case key.Matches(msg, DefaultKeyMap.Down):
+		if m.selected < len(m.rows)-1 {
+			m.selected += 1
+		}
 	case key.Matches(msg, DefaultKeyMap.Quit):
 		return tea.Quit
 	}
