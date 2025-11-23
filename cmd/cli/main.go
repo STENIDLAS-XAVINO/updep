@@ -1,14 +1,19 @@
 package main
 
 import (
+	"npmupdate/pkg/entities"
+
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 type AppModel struct {
+	packages []entities.Package
 }
 
 func NewAppModel() AppModel {
+	packages := entities.ParseJSON()
 	return AppModel{
+		packages: packages,
 	}
 }
 
