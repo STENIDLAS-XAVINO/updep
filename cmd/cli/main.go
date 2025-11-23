@@ -10,6 +10,7 @@ import (
 
 type AppModel struct {
 	packages []entities.Package
+	header   row.Row
 	rows     []row.Row
 	cursor   int
 }
@@ -25,6 +26,13 @@ func NewAppModel() AppModel {
 		columnWidth[3] = max(columnWidth[3], lipgloss.Width(p.Current))
 	}
 
+	header := row.New(entities.Package{
+		Name:    "Package Name",
+		Current: "Wanted",
+		Wanted:  "Latest",
+		Latest:  "Current",
+	}, columnWidth)
+
 	rows := []row.Row{}
 	for _, p := range packages {
 		rows = append(rows, row.New(p, columnWidth))
@@ -32,6 +40,7 @@ func NewAppModel() AppModel {
 
 	return AppModel{
 		packages: packages,
+		header:   header,
 		rows:     rows,
 		cursor:   0,
 	}
