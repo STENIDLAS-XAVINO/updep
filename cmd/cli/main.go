@@ -96,6 +96,7 @@ func (m AppModel) View() string {
 
 func main() {
 	p := tea.NewProgram(NewAppModel())
+	defer p.Kill()
 	if _, err := p.Run(); err != nil {
 		panic(err)
 	}
