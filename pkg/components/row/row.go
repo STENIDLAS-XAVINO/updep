@@ -31,24 +31,24 @@ func (r Row) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (r Row) View() string {
-	nameCellStyle := lipgloss.NewStyle().Render
-	wantedCellStyle := lipgloss.NewStyle().Render
-	latestCellStyle := lipgloss.NewStyle().Render
+	nameCellStyle := lipgloss.NewStyle()
+	wantedCellStyle := lipgloss.NewStyle()
+	latestCellStyle := lipgloss.NewStyle()
 
 	nameCell := lipgloss.PlaceHorizontal(
 		r.columnWidths[0]+gap,
 		lipgloss.Left,
-		nameCellStyle(r.pkg.Name),
+		nameCellStyle.Render(r.pkg.Name),
 	)
 	wantedCell := lipgloss.PlaceHorizontal(
 		r.columnWidths[1]+gap,
 		lipgloss.Left,
-		wantedCellStyle(r.pkg.Wanted.String()),
+		wantedCellStyle.Render(r.pkg.Wanted.String()),
 	)
 	latestCell := lipgloss.PlaceHorizontal(
 		r.columnWidths[2]+gap,
 		lipgloss.Left,
-		latestCellStyle(r.pkg.Latest.String()),
+		latestCellStyle.Render(r.pkg.Latest.String()),
 	)
 	currentCell := lipgloss.PlaceHorizontal(
 		r.columnWidths[3],

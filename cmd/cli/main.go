@@ -83,7 +83,7 @@ func (m AppModel) View() string {
 
 		renderRows = append(
 			renderRows,
-			row.ActiveRowStyle(p.View()),
+			row.ActiveRowStyle.Render(p.View()),
 		)
 	}
 
