@@ -4,6 +4,7 @@ import (
 	"npmupdate/pkg/components/row"
 	"npmupdate/pkg/entities"
 
+	"github.com/charmbracelet/bubbles/help"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -13,6 +14,7 @@ type AppModel struct {
 	header   row.Row
 	rows     []row.Row
 	cursor   int
+	help    help.Model
 }
 
 func NewAppModel() AppModel {
@@ -43,6 +45,7 @@ func NewAppModel() AppModel {
 		header:   header,
 		rows:     rows,
 		cursor:   0,
+		help:    help.New(),
 	}
 }
 
@@ -75,7 +78,11 @@ func (m AppModel) View() string {
 		)
 	}
 
-	return lipgloss.JoinVertical(lipgloss.Left, renderRows...)
+	return lipgloss.JoinVertical(
+		lipgloss.Left,
+		lipgloss.JoinVertical(lipgloss.Left, renderRows...),
+		m.help.View(keyMap),
+	)
 }
 
 func main() {
