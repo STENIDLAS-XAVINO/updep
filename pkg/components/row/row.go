@@ -31,23 +31,36 @@ func (r Row) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (r Row) View() string {
-	return lipgloss.JoinHorizontal(
+	nameCellStyle := lipgloss.NewStyle().Render
+	wantedCellStyle := lipgloss.NewStyle().Render
+	latestCellStyle := lipgloss.NewStyle().Render
+
+	nameCell := lipgloss.PlaceHorizontal(
+		r.columnWidths[0]+gap,
 		lipgloss.Left,
-		lipgloss.PlaceHorizontal(r.columnWidths[0]+gap, lipgloss.Left, r.pkg.Name),
-		lipgloss.PlaceHorizontal(
-			r.columnWidths[1]+gap,
-			lipgloss.Left,
-			r.pkg.Wanted,
-		),
-		lipgloss.PlaceHorizontal(
-			r.columnWidths[2]+gap,
-			lipgloss.Left,
-			r.pkg.Latest,
-		),
-		lipgloss.PlaceHorizontal(
-			r.columnWidths[3],
-			lipgloss.Left,
-			r.pkg.Current,
-		),
+		nameCellStyle(r.pkg.Name),
+	)
+	wantedCell := lipgloss.PlaceHorizontal(
+		r.columnWidths[1]+gap,
+		lipgloss.Left,
+		wantedCellStyle(r.pkg.Wanted.String()),
+	)
+	latestCell := lipgloss.PlaceHorizontal(
+		r.columnWidths[2]+gap,
+		lipgloss.Left,
+		latestCellStyle(r.pkg.Latest.String()),
+	)
+	currentCell := lipgloss.PlaceHorizontal(
+		r.columnWidths[3],
+		lipgloss.Left,
+		r.pkg.Current.String(),
+	)
+
+	return lipgloss.JoinHorizontal(
+		lipgloss.Center,
+		nameCell,
+		wantedCell,
+		latestCell,
+		currentCell,
 	)
 }

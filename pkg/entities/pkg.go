@@ -2,16 +2,43 @@ package entities
 
 import (
 	"encoding/json"
+	"errors"
 	"strings"
 	"time"
 )
 
 type Package struct {
-	Name     string
-	Current  string `json:"current"`
-	Wanted   string `json:"wanted"`
-	Latest   string `json:"latest"`
-	selected string
+	Name    string
+	Wanted  Version
+	Latest  Version
+	Current Version
+}
+
+func NewPackage(
+	name string,
+	wantedVersion string,
+	latestVersion string,
+	currentVersion string,
+) (*Package, error) {
+	wanted, err := NewVersion(wantedVersion)
+	if err != nil {
+		return nil, errors.New("invalid version")
+	}
+	latest, err := NewVersion(latestVersion)
+	if err != nil {
+		return nil, errors.New("invalid version")
+	}
+	current, err := NewVersion(currentVersion)
+	if err != nil {
+		return nil, errors.New("invalid version")
+	}
+
+	return &Package{
+		Name:    name,
+		Wanted:  *wanted,
+		Latest:  *latest,
+		Current: *current,
+	}, nil
 }
 
 type JSONPackage struct {
