@@ -1,5 +1,13 @@
 package row
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"npmupdate/pkg/config"
 
-var ActiveRowStyle = lipgloss.NewStyle().Bold(true).Underline(true)
+	"github.com/charmbracelet/lipgloss"
+)
+
+var (
+	ActiveRowStyle = lipgloss.NewStyle().
+			Bold(true).
+			Background(config.Theme.Surface1).Render
+)
