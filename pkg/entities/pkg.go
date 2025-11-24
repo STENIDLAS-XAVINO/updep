@@ -3,6 +3,7 @@ package entities
 import (
 	"encoding/json"
 	"strings"
+	"time"
 )
 
 type Package struct {
@@ -13,29 +14,29 @@ type Package struct {
 	selected string
 }
 
-func ParseJSON() []Package {
+type JSONPackage struct {
+	Name    string
+	Wanted  string `json:"wanted"`
+	Latest  string `json:"latest"`
+	Current string `json:"current"`
+}
+
+func FetchOutdatedPackages() (map[string]JSONPackage, error) {
+	timer := time.NewTimer(time.Second * 1)
+	<-timer.C
 	// output, err := exec.Command("npm", "outdated", "--json").Output()
 	// if err != nil {
 	// 	fmt.Println("🪚 err:", err)
 	// }
+	var err error
 
-	var outdated map[string]Package
-	err := json.NewDecoder(strings.NewReader(string(output))).Decode(&outdated)
+	var outdated map[string]JSONPackage
+	err = json.NewDecoder(strings.NewReader(string(output))).Decode(&outdated)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	packages := make([]Package, 0, len(outdated))
-	for packageName, value := range outdated {
-		packages = append(packages, Package{
-			Name:    packageName,
-			Current: value.Current,
-			Wanted:  value.Wanted,
-			Latest:  value.Latest,
-		})
-	}
-
-	return packages
+	return outdated, nil
 }
 
 var output string = `
