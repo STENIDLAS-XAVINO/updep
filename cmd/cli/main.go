@@ -11,10 +11,12 @@ import (
 )
 
 type AppModel struct {
-	spinner spinner.Model
-	help    help.Model
-	rows    []row.Row
-	cursor  int
+	loading      bool
+	spinner      spinner.Model
+	help         help.Model
+	rows         []row.Row
+	cursor       int
+	columnWidths [config.ColumnCount]int
 }
 
 func NewAppModel() AppModel {
@@ -23,10 +25,12 @@ func NewAppModel() AppModel {
 	s.Style = lipgloss.NewStyle().Foreground(config.Theme.Mauve)
 
 	return AppModel{
-		spinner: s,
-		help:    help.New(),
-		rows:    []row.Row{},
-		cursor:  0,
+		loading:      true,
+		spinner:      s,
+		help:         help.New(),
+		rows:         []row.Row{},
+		columnWidths: [config.ColumnCount]int{},
+		cursor:       0,
 	}
 }
 
@@ -52,6 +56,7 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		for _, p := range packages {
 			m.rows = append(m.rows, row.New(p, columnWidth))
 		}
+		m.loading = false
 	case tea.KeyMsg:
 		cmds = append(cmds, m.handleKeyPress(msg))
 	}
@@ -62,15 +67,17 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		cmds = append(cmds, cmd)
 	}
 
-	var cmd tea.Cmd
-	m.spinner, cmd = m.spinner.Update(msg)
-	cmds = append(cmds, cmd)
+	if m.loading {
+		var cmd tea.Cmd
+		m.spinner, cmd = m.spinner.Update(msg)
+		cmds = append(cmds, cmd)
+	}
 
 	return m, tea.Batch(cmds...)
 }
 
 func (m AppModel) View() string {
-	if len(m.rows) == 0 {
+	if m.loading {
 		return m.spinner.View() + " Getting outdated packages"
 	}
 
