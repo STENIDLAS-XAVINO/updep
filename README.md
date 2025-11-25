@@ -1,5 +1,10 @@
 # updep
 
+[![CI](https://github.com/snikoletopoulos/updep/actions/workflows/ci.yml/badge.svg)](https://github.com/snikoletopoulos/updep/actions/workflows/ci.yml)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/snikoletopoulos/updep)](https://github.com/snikoletopoulos/updep)
+[![License](https://img.shields.io/github/license/snikoletopoulos/updep)](LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/snikoletopoulos/updep)](https://goreportcard.com/report/github.com/snikoletopoulos/updep)
+
 Interactive TUI for updating JavaScript dependencies. Works with npm, yarn, pnpm, and bun.
 
 ## Demo
