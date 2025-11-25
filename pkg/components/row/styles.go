@@ -1,7 +1,7 @@
 package row
 
 import (
-	"npmupdate/pkg/config"
+	"updep/pkg/config"
 
 	"github.com/charmbracelet/lipgloss"
 )

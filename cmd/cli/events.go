@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 
-	packagemodel "npmupdate/pkg/models/package"
+	packagemodel "updep/pkg/models/package"
 
 	tea "github.com/charmbracelet/bubbletea"
 )

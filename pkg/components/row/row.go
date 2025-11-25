@@ -1,9 +1,9 @@
 package row
 
 import (
-	"npmupdate/pkg/config"
-	packagemodel "npmupdate/pkg/models/package"
-	"npmupdate/pkg/models/version"
+	"updep/pkg/config"
+	packagemodel "updep/pkg/models/package"
+	"updep/pkg/models/version"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"

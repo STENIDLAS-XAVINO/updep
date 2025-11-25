@@ -3,7 +3,7 @@ package packagemodel
 import (
 	"errors"
 
-	"npmupdate/pkg/models/version"
+	"updep/pkg/models/version"
 )
 
 type Package struct {

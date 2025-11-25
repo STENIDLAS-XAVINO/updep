@@ -1,4 +1,4 @@
-module npmupdate
+module updep
 
 go 1.25.2
 
