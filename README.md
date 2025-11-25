@@ -60,7 +60,7 @@ updep
 
 ## Roadmap
 
-- [x] npm support
+- [ ] npm support
 - [ ] yarn support
 - [ ] pnpm support
 - [ ] bun support
