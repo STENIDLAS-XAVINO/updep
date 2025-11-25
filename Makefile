@@ -11,13 +11,13 @@ run:
 
 .PHONY: build
 build:
-	@go build -ldflags="-w -s" -o main ./cmd/updep
+	@go build -ldflags="-w -s" -o updep ./cmd/updep
 
 .PHONY: start
 start:
-	@./tmp/cli
+	@./tmp/updep
 
 .PHONY: clean
 clean:
-	@rm -rf ./tmp
+	@rm -rf ./updep
 
