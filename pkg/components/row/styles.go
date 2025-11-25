@@ -12,10 +12,9 @@ var (
 			Background(config.Theme.Surface1)
 	latestStyle       = lipgloss.NewStyle().Foreground(config.Theme.Red)
 	errorVersionStyle = lipgloss.NewStyle().Foreground(config.Theme.Red)
-	needUpdateStyle   = lipgloss.NewStyle().
+	needUpdateStyle   = lipgloss.NewStyle().Foreground(config.Theme.Red)
+	wantedStyle       = lipgloss.NewStyle().
 				Foreground(config.Theme.Green)
-	wantedStyle = lipgloss.NewStyle().
-			Foreground(config.Theme.Green)
 	optionalUpdateStyle = lipgloss.NewStyle().
-				Foreground(config.Theme.Peach)
+				Foreground(config.Theme.Yellow)
 )
