@@ -1,4 +1,4 @@
-package entities
+package version
 
 import (
 	"errors"
@@ -14,7 +14,7 @@ type Version struct {
 	patch int
 }
 
-func NewVersion(str string) (*Version, error) {
+func New(str string) (*Version, error) {
 	versions := strings.Split(str, ".")
 
 	if len(versions) != 3 {
