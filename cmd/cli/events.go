@@ -3,22 +3,22 @@ package main
 import (
 	"errors"
 
-	"npmupdate/pkg/entities"
+	packagemodel "npmupdate/pkg/models/package"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
 
-type OutdatedPackagesMsg []entities.Package
+type OutdatedPackagesMsg []packagemodel.Package
 
 func getOutdatedPackages() tea.Msg {
-	result, err := entities.FetchOutdatedPackages()
+	result, err := packagemodel.FetchOutdatedPackages()
 	if err != nil {
 		panic(err)
 	}
 
-	packages := []entities.Package{}
+	packages := []packagemodel.Package{}
 	for packageName, value := range result {
-		pkg, err := entities.NewPackage(
+		pkg, err := packagemodel.New(
 			packageName,
 			value.Wanted,
 			value.Latest,
