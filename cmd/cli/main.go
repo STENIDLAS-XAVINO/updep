@@ -1,8 +1,8 @@
 package main
 
 import (
-	"npmupdate/pkg/components/row"
-	"npmupdate/pkg/config"
+	"updep/pkg/components/row"
+	"updep/pkg/config"
 
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/spinner"
