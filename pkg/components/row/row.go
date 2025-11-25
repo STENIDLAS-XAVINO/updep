@@ -38,13 +38,13 @@ func (r Row) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (r Row) View() string {
-	var cells []string
-	for index, cell := range r.getCellStyles() {
-		width := r.ColumnWidths[index] + config.ColumnGap
-		if index == len(r.ColumnWidths)-1 {
+	cells := make([]string, config.ColumnCount)
+	for i, cell := range r.getCellStyles() {
+		width := r.ColumnWidths[i] + config.ColumnGap
+		if i == len(r.ColumnWidths)-1 {
 			width -= config.ColumnGap
 		}
-		cells = append(cells, lipgloss.PlaceHorizontal(width, lipgloss.Left, cell))
+		cells[i] = lipgloss.PlaceHorizontal(width, lipgloss.Left, cell)
 	}
 
 	return lipgloss.JoinHorizontal(lipgloss.Center, cells...)
