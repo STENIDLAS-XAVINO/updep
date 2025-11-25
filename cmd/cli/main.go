@@ -44,17 +44,10 @@ func (m AppModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case OutdatedPackagesMsg:
 		packages := msg
-
-		columnWidth := []int{0, 0, 0, 0}
-		for _, p := range packages {
-			columnWidth[0] = max(columnWidth[0], lipgloss.Width(p.Name))
-			columnWidth[1] = max(columnWidth[1], lipgloss.Width(p.Wanted.String()))
-			columnWidth[2] = max(columnWidth[2], lipgloss.Width(p.Latest.String()))
-			columnWidth[3] = max(columnWidth[3], lipgloss.Width(p.Current.String()))
-		}
-
-		for _, p := range packages {
-			m.rows = append(m.rows, row.New(p, columnWidth))
+		m.columnWidths = row.CalculateColumnWidths(packages)
+		m.rows = make([]row.Row, len(packages))
+		for i, p := range packages {
+			m.rows[i] = row.New(p, m.columnWidths)
 		}
 		m.loading = false
 	case tea.KeyMsg:
