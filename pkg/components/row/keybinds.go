@@ -27,18 +27,18 @@ var keyMap = KeyMap{
 func (r *Row) handleKeyPress(msg tea.KeyMsg) tea.Cmd {
 	switch {
 	case key.Matches(msg, keyMap.Wanted):
-		r.target = &r.pkg.Wanted
+		r.Target = &r.Pkg.Wanted
 	case key.Matches(msg, keyMap.Latest):
-		r.target = &r.pkg.Latest
+		r.Target = &r.Pkg.Latest
 	case key.Matches(msg, keyMap.ToggleSelect):
-		if r.target != nil {
-			r.target = nil
+		if r.Target != nil {
+			r.Target = nil
 			break
 		}
-		if r.pkg.Current.Compare(r.pkg.Wanted) >= 0 {
-			r.target = &r.pkg.Latest
+		if r.Pkg.Current.Compare(r.Pkg.Wanted) >= 0 {
+			r.Target = &r.Pkg.Latest
 		} else {
-			r.target = &r.pkg.Wanted
+			r.Target = &r.Pkg.Wanted
 		}
 	}
 	return nil

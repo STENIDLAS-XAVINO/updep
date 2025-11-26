@@ -10,14 +10,14 @@ import (
 )
 
 type Row struct {
-	pkg          packagemodel.Package
-	target       *version.Version
+	Pkg          packagemodel.Package
+	Target       *version.Version
 	ColumnWidths [config.ColumnCount]int
 }
 
 func New(pkg packagemodel.Package, columnWidths [config.ColumnCount]int) Row {
 	return Row{
-		pkg:          pkg,
+		Pkg:          pkg,
 		ColumnWidths: columnWidths,
 	}
 }
@@ -53,27 +53,27 @@ func (r Row) View() string {
 func (r Row) getCellStyles() [config.ColumnCount]string {
 	var nameCellStyle, wantedCellStyle, latestCellStyle lipgloss.Style
 
-	if r.pkg.Current.Compare(r.pkg.Wanted) == -1 {
+	if r.Pkg.Current.Compare(r.Pkg.Wanted) == -1 {
 		nameCellStyle = needUpdateStyle
-	} else if r.pkg.Current.Compare(r.pkg.Wanted) == 1 {
+	} else if r.Pkg.Current.Compare(r.Pkg.Wanted) == 1 {
 		nameCellStyle = errorVersionStyle
 	} else {
 		nameCellStyle = optionalUpdateStyle
 	}
 
-	if r.target != nil {
-		switch *r.target {
-		case r.pkg.Wanted:
+	if r.Target != nil {
+		switch *r.Target {
+		case r.Pkg.Wanted:
 			wantedCellStyle = wantedStyle
-		case r.pkg.Latest:
+		case r.Pkg.Latest:
 			latestCellStyle = latestStyle
 		}
 	}
 
 	return [config.ColumnCount]string{
-		nameCellStyle.Render(r.pkg.Name),
-		wantedCellStyle.Render(r.pkg.Wanted.String()),
-		latestCellStyle.Render(r.pkg.Latest.String()),
-		r.pkg.Current.String(),
+		nameCellStyle.Render(r.Pkg.Name),
+		wantedCellStyle.Render(r.Pkg.Wanted.String()),
+		latestCellStyle.Render(r.Pkg.Latest.String()),
+		r.Pkg.Current.String(),
 	}
 }
