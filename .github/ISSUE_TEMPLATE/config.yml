@@ -1,8 +1,0 @@
-blank_issues_enabled: true
-contact_links:
-  - name: Ask a Question
-    url: https://github.com/snikoletopoulos/updep/discussions
-    about: Have a question? Ask in our Discussions forum instead of creating an issue
-  - name: General Discussions
-    url: https://github.com/snikoletopoulos/updep/discussions
-    about: For general discussions, ideas, and community support
